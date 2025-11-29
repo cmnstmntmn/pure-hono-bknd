@@ -20,8 +20,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
 
     "postinstall": "bun run dev:copy-assets && bun run cf-typegen",
-
-    "sync": "PROXY=1 bun bknd -- sync --force",
+    "sync": "PROXY=1 bunx bknd -- sync --force",
 
     "analyze:build": "bun run build",
     "analyze:wrangler-dry": "bun wrangler deploy --dry-run",
