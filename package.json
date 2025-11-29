@@ -4,23 +4,13 @@
   "scripts": {
     "dev:bknd-typegen": "PROXY=1 runx bknd types",
     "dev:copy-assets": "bunx bknd copy-assets --out public",
-    "dev:sync": "PROXY=1 bunx bknd -- sync --force",
-    "dev:all": "bun run dev:bknd-typegen & bun run dev:sync",
-    "dev": "bun run vite && dev:all",
-
-    "build": "vite build",
-    "build:assets": "bun run bknd copy-assets --out public",
-    "preview": "bun run build && vite preview",
-
-    "deploy:build": "bun run build",
-    "deploy:wrangler": "wrangler deploy",
-    "deploy": "bun run deploy:build && bun run deploy:wrangler",
-
+    "dev:sync": "PROXY=1 bun node_modules/.bin/bknd -- sync --force",
+    "dev:all": "bun run dev:bknd-typegen && bun run dev:sync",
+    "dev": "vite && dev:all",
+    "deploy": "vite build && wrangler deploy",
     "bknd-typegen": "PROXY=1 $npm_execpath bknd types",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
-
-    "postinstall": "bun run dev:copy-assets && bun run cf-typegen",
-    "sync": "PROXY=1 bunx bknd -- sync --force",
+    "postinstall": "bun run bknd copy-assets --out public && bun run cf-typegen",
 
     "analyze:build": "bun run build",
     "analyze:wrangler-dry": "bun wrangler deploy --dry-run",

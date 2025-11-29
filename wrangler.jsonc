@@ -1,26 +1,28 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "hono_sambata",
-  "main": "./src/index.tsx",
-  "compatibility_date": "2025-11-25",
-  "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,
-  "assets": {
-    "directory": "./public",
-  },
-  "observability": {
-    "enabled": true,
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "database",
-      "database_id": "00000000-0000-0000-0000-000000000000",
-    },
-  ],
-  "r2_buckets": [
-    {
-      "binding": "BUCKET",
-    },
-  ],
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "hono_sambata",
+	"main": "./src/index.tsx",
+	"compatibility_date": "2025-11-25",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"workers_dev": true,
+	"assets": {
+		"directory": "./public",
+	},
+	"observability": {
+		"enabled": true,
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_id": "31cd950d-f31f-4d67-8943-683f9a2ab003",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "BUCKET",
+			"bucket_name": "media"
+		},
+	],
 }

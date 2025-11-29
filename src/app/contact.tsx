@@ -1,5 +1,3 @@
-export default function (c) {
-  console.log(c)
-
+export default function () {
   return <span class="bg-red-300">contact</span>;
 }

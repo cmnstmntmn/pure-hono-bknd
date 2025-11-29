@@ -6,7 +6,7 @@ import { cloudflareImageOptimization } from "bknd/plugins";
 const schema = em({
   todos: entity("todos", {
     title: text(),
-    doneee: boolean(),
+    done: boolean(),
   }),
 });
 
