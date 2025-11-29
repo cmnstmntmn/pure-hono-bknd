@@ -1,26 +1,26 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "test",
-	"main": "./src/index.tsx",
-	"compatibility_date": "2025-11-25",
-	"compatibility_flags": ["nodejs_compat"],
-	"workers_dev": true,
-	"assets": {
-		"directory": "./public"
-	},
-	"observability": {
-		"enabled": true
-	},
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_id": "31cd950d-f31f-4d67-8943-683f9a2ab003"
-		}
-	],
-	"r2_buckets": [
-		{
-			"binding": "BUCKET",
-			"bucket_name": "media"
-		}
-	]
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "test",
+  "main": "./src/index.tsx",
+  "compatibility_date": "2025-11-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+  },
+  "observability": {
+    "enabled": true,
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "9a699bc0-3b2d-4cce-ac59-b5d6fcae16dc",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "media",
+    },
+  ],
 }
