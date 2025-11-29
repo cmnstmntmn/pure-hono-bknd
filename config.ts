@@ -23,7 +23,7 @@ export default {
       sync: true,
    },
    app: (env) => {
-      console.log('env');
+      console.log('env', env);
 
       return {
          // in production mode, we use the appconfig.json file as static config
@@ -82,4 +82,4 @@ export default {
    },
    // remove "<any>" once you added the env variables
    // wrangler types should properly type it
-} satisfies CloudflareBkndConfig<any>;
+} satisfies CloudflareBkndConfig;

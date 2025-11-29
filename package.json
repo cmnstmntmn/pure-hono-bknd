@@ -2,15 +2,30 @@
   "name": "hono_sambata",
   "type": "module",
   "scripts": {
-    "dev": "vite && bun run bknd-typegen && bun run sync",
+    "dev:bknd-typegen": "PROXY=1 runx bknd types",
+    "dev:copy-assets": "bunx bknd copy-assets --out public",
+    "dev:sync": "PROXY=1 bunx bknd -- sync --force",
+    "dev:all": "bun run dev:bknd-typegen & bun run dev:sync",
+    "dev": "bun run vite && dev:all",
+
     "build": "vite build",
-    "preview": "$npm_execpath run build && vite preview",
-    "deploy": "$npm_execpath run build && wrangler deploy",
-    "bknd-typegen": "PROXY=1 bunx bknd types",
+    "build:assets": "bun run bknd copy-assets --out public",
+    "preview": "bun run build && vite preview",
+
+    "deploy:build": "bun run build",
+    "deploy:wrangler": "wrangler deploy",
+    "deploy": "bun run deploy:build && bun run deploy:wrangler",
+
+    "bknd-typegen": "PROXY=1 $npm_execpath bknd types",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
-    "postinstall": "bun run bknd copy-assets --out public && bun run cf-typegen",
+
+    "postinstall": "bun run dev:copy-assets && bun run cf-typegen",
+
     "sync": "PROXY=1 bun bknd -- sync --force",
-    "analyze": "bun run build && bunx wrangler deploy --dry-run"
+
+    "analyze:build": "bun run build",
+    "analyze:wrangler-dry": "bun wrangler deploy --dry-run",
+    "analyze": "bun run analyze:build && bun run analyze:wrangler-dry"
   },
   "dependencies": {
     "bknd": "^0.19.0",
