@@ -6,6 +6,7 @@ import { renderer } from "./renderer";
 import type { App } from "bknd";
 import { Api } from "bknd/client";
 import { getFresh } from "bknd/adapter/cloudflare";
+import config from "../config";
 
 // components
 import Contact from "./app/contact";
@@ -24,16 +25,7 @@ const app = new Hono<{
    })
 )
 .use(async (c, next) => {
-  const app = await getFresh(
-    {
-      // your bknd config goes here
-      d1: {
-        session: true,
-      },
-      adminOptions: {
-        adminBasepath: "/admin",
-      },
-    },
+  const app = await getFresh( config,
     { request: c.req.raw, env: c.env, ctx: c.executionCtx },
   );
 
