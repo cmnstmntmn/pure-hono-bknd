@@ -6,7 +6,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
   "assets": {
-    "directory": "node_modules/bknd/dist/static",
+    "directory": "./public",
   },
   "observability": {
     "enabled": true,
