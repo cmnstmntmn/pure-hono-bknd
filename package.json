@@ -2,12 +2,14 @@
   "name": "hono_sambata",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite && bun run bknd-typegen && bun run sync",
     "build": "vite build",
     "preview": "$npm_execpath run build && vite preview",
     "deploy": "$npm_execpath run build && wrangler deploy",
+    "bknd-typegen": "PROXY=1 bunx bknd types",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "postinstall": "bun run bknd copy-assets --out public && bun run cf-typegen",
+    "sync": "PROXY=1 bun bknd -- sync --force",
     "analyze": "bun run build && bunx wrangler deploy --dry-run"
   },
   "dependencies": {

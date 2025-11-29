@@ -1,5 +1,14 @@
 import type { CloudflareBkndConfig } from "bknd/adapter/cloudflare";
 import { em, entity, text, boolean } from "bknd";
+import { secureRandomString } from "bknd/utils";
+import { cloudflareImageOptimization } from "bknd/plugins";
+
+const schema = em({
+  todos: entity("todos", {
+    title: text(),
+    doneee: boolean(),
+  }),
+});
 
 export default {
    d1: {
@@ -19,27 +28,55 @@ export default {
       return {
          // in production mode, we use the appconfig.json file as static config
          config: {
-            data: em({
-               todos: entity("todos", {
-                  title: text(),
-                  description: text(),
-                  completed: boolean(),
-               }),
-            }).toJSON(),
-            // media: {
-            //    enabled: true,
-            //    adapter: {
-            //       type: "s3",
-            //       config: {
-            //          access_key: env.S3_ACCESS_KEY,
-            //          secret_access_key: env.S3_SECRET_ACCESS_KEY,
-            //          url: env.S3_URL,
-            //       },
-            //    },
-            // },
+           data: schema.toJSON(),
+           server: {
+             mcp: {
+               enabled: true,
+             },
+           },
+           auth: {
+             enabled: true,
+             jwt: {
+               issuer: "domzz",
+               secret: secureRandomString(64),
+             },
+             guard: { enabled: false },
+             roles: {
+               EDITOR: {
+                 is_default: true,
+                 implicit_allow: false,
+                 permissions: [
+                   "system.access.api",
+                   "media.file.read",
+                   "data.entity.read",
+                 ],
+               },
+               ADMIN: {
+                 implicit_allow: true,
+               },
+             },
+           },
+           media: {
+             enabled: true,
+             adapter: {
+               type: "r2",
+               config: {
+                 binding: "BUCKET",
+               },
+             },
+           },
          },
          options: {
             mode: "code",
+            plugins: [
+              cloudflareImageOptimization({
+                accessUrl: "/api/_plugin/image/optimize",
+                explain: true,
+              }),
+            ],
+         },
+         onBuilt: async (app) => {
+           console.log("On build");
          },
       };
    },
