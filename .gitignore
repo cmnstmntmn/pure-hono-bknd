@@ -30,9 +30,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-static/assets
-static/favicon.ico
-static/manifest.json
+public/assets
+public/favicon.ico
+public/manifest.json
 src/worker-configuration.d.ts
 
 # misc

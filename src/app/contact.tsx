@@ -1,3 +1,3 @@
-export default function () {
-  return <span class="bg-red-300">contact</span>;
+export default function (language) {
+	return <span class="bg-red-300">{JSON.stringify(language, null, 2)}</span>;
 }
