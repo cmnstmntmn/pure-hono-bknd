@@ -6,15 +6,15 @@ import { analyzer } from "vite-bundle-analyzer";
 import ssrPlugin from "vite-ssr-components/plugin";
 
 export default defineConfig(({ mode }) => ({
-	clearScreen: false,
-	plugins: [
-		devFsVitePlugin({ configFile: "config.ts" }),
-		cloudflare(),
-		tailwindcss(),
-		ssrPlugin(),
-		analyzer({ enabled: mode === "analyze" }),
-	],
-	build: {
-		minify: false,
-	},
+  clearScreen: false,
+  plugins: [
+    devFsVitePlugin({ configFile: "config.ts" }),
+    cloudflare(),
+    tailwindcss(),
+    ssrPlugin(),
+    analyzer({ enabled: mode === "analyze" }),
+  ],
+  build: {
+    minify: true,
+  },
 }));
