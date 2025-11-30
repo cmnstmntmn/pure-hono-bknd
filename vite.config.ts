@@ -6,7 +6,7 @@ import { analyzer } from "vite-bundle-analyzer";
 import ssrPlugin from "vite-ssr-components/plugin";
 
 export default defineConfig(({ mode }) => ({
-  clearScreen: false,
+  clearScreen: true,
   plugins: [
     devFsVitePlugin({ configFile: "config.ts" }),
     cloudflare(),
