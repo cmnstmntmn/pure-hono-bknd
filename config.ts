@@ -38,7 +38,7 @@ export default {
             issuer: "domzz",
             secret: secureRandomString(64),
           },
-          guard: { enabled: false },
+          guard: { enabled: true },
           roles: {
             EDITOR: {
               is_default: true,

@@ -29,8 +29,12 @@ const app = new Hono<{
       ctx: c.executionCtx,
     });
 
-    const api = app.getApi(c.req.raw);
+    const api = app.getApi({ headers: c.req.raw.headers });
     await api.verifyAuth();
+
+    const me = await api.auth.me();
+
+    console.log("me =>", me);
 
     c.set("app", app);
     c.set("api", api);
@@ -51,10 +55,6 @@ app.all("/api/*", (c) => {
 
 app.get("/admin/*", (c) => {
   return c.var.app.fetch(c.req.raw);
-});
-
-app.get("/contact", (c) => {
-  return c.render(<Contact />);
 });
 
 showRoutes(app, { verbose: false });
