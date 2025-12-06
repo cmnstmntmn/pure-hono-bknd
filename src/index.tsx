@@ -2,11 +2,11 @@ import type { App } from "bknd";
 import { getFresh } from "bknd/adapter/cloudflare";
 import type { Api } from "bknd/client";
 import { Hono } from "hono";
+import { trimTrailingSlash } from "hono/trailing-slash";
 import { showRoutes } from "hono/dev";
 import { languageDetector } from "hono/language";
 import config from "../config";
 
-import Contact from "./app/contact";
 import { renderer } from "./renderer";
 
 const app = new Hono<{
@@ -16,6 +16,7 @@ const app = new Hono<{
     api: Api;
   };
 }>()
+  .use(trimTrailingSlash())
   .use(
     languageDetector({
       supportedLanguages: ["en", "es", "de", "it", "nl", "zh"],
